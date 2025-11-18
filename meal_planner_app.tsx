@@ -304,63 +304,6 @@ export default function MealPlanner() {
     }
   };
 
-  // Função para enviar mensagem no chat
-  const handleEnviarChat = async () => {
-    if (!chatInput.trim() || enviandoChat) return;
-
-    const userMessage = chatInput.trim();
-    setChatInput("");
-
-    // Adicionar mensagem do usuário
-    const newUserMessage = {
-      role: "user" as const,
-      content: userMessage,
-      timestamp: Date.now(),
-    };
-    setChatMessages((prev) => [...prev, newUserMessage]);
-
-    setEnviandoChat(true);
-
-    try {
-      const response = await fetch("http://localhost:8001/api/agent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ command: userMessage }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      // Adicionar resposta do agente
-      const agentMessage = {
-        role: "agent" as const,
-        content: data.response,
-        timestamp: Date.now(),
-      };
-      setChatMessages((prev) => [...prev, agentMessage]);
-
-      // Recarregar alimentos se o comando foi de adição/atualização/remoção
-      if (
-        userMessage
-          .toLowerCase()
-          .match(/adicion|adicione|remov|delete|atualize|update/)
-      ) {
-        carregarAlimentos();
-      }
-    } catch (error) {
-      const errorMessage = {
-        role: "agent" as const,
-        content: `❌ Erro ao processar comando: ${error instanceof Error ? error.message : "Erro desconhecido"}`,
-        timestamp: Date.now(),
-      };
-      setChatMessages((prev) => [...prev, errorMessage]);
-    } finally {
-      setEnviandoChat(false);
-    }
-  };
 
   // Função para salvar como padrão
   const salvarComoPadrao = () => {

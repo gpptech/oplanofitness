@@ -5,14 +5,8 @@
 fastapi==0.115.6
 uvicorn[standard]==0.34.0
 
-# OpenAI API (AI Agent)
-openai==1.59.5
-
-# Environment Variables
-python-dotenv==1.0.1
-
 # Data Validation
 pydantic==2.10.5
 
-# CORS Middleware (já incluído no FastAPI, mas explicitando)
+# CORS Middleware (já incluído no FastAPI)
 # starlette (dependency do FastAPI) fornece CORSMiddleware

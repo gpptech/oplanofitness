@@ -93,8 +93,9 @@ def main():
     # Verificar se .env.example não tem secrets
     if Path('.env.example').exists():
         env_example = Path('.env.example').read_text(encoding='utf-8')
-        all_ok &= check('sk-proj-your' in env_example.lower() or 'your-api-key' in env_example.lower(),
-                       ".env.example tem placeholder (nao secret real)")
+        # Verificar que não contém chaves reais (começam com sk- seguido de caracteres longos)
+        has_real_key = 'sk-proj-' in env_example and len(env_example.split('sk-proj-')[1].split()[0]) > 50
+        all_ok &= check(not has_real_key, ".env.example nao contem secrets reais")
     print()
 
     # 6. Git

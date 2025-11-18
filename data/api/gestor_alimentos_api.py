@@ -1,7 +1,6 @@
 # data/api/gestor_alimentos_api.py
 
 import logging
-import os
 import sqlite3
 from datetime import date, datetime
 from typing import Optional, List
@@ -11,16 +10,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, validator, Field
-from dotenv import load_dotenv
-
-try:
-    from openai import OpenAI  # type: ignore
-except ImportError:  # pragma: no cover - optional dependency
-    OpenAI = None
-
-# Load .env from project root
-env_path = Path(__file__).parent.parent.parent / '.env'
-load_dotenv(dotenv_path=env_path)
 
 # ============================
 # CONFIGURAÇÃO
@@ -46,30 +35,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# OpenAI client for agent endpoint (optional)
 logger = logging.getLogger("gestor_alimentos_api")
-
-def _create_openai_client():
-    api_key = os.getenv('OPENAI_API_KEY')
-    if not api_key:
-        logger.info("OPENAI_API_KEY nao definido; endpoints de agente serao desativados.")
-        return None
-    if OpenAI is None:
-        logger.warning("Biblioteca 'openai' nao encontrada; instale para habilitar o agente.")
-        return None
-    try:
-        return OpenAI(api_key=api_key)
-    except TypeError as exc:
-        if 'proxies' in str(exc):
-            logger.error("Falha ao inicializar OpenAI (parametro proxies nao suportado). Atualize o pacote openai.")
-        else:
-            logger.error("Falha ao inicializar OpenAI: %s", exc)
-    except Exception as exc:  # pragma: no cover - log unexpected init issues
-        logger.error("Erro inesperado ao inicializar OpenAI: %s", exc)
-    return None
-
-
-client = _create_openai_client()
 
 # ============================
 # MODELOS PYDANTIC
@@ -133,14 +99,6 @@ class HistoricoCreate(BaseModel):
         if not values.get('refeicao_id') and (not v or len(v) == 0):
             raise ValueError('Se refeicao_id for NULL, itens é obrigatório')
         return v
-
-
-class PromptIn(BaseModel):
-    prompt: str
-
-
-class AgentCommand(BaseModel):
-    command: str
 
 
 # ============================
@@ -851,26 +809,6 @@ async def excluir_historico(id: int):
     conn.close()
 
     return None  # 204 No Content
-
-
-# ============================
-# LEGACY ENDPOINTS
-# ============================
-
-@app.post('/api/add-food')
-async def add_food(payload: PromptIn):
-    """Legacy endpoint - now uses agent_tools for consistency"""
-    import agent_tools
-    prompt_text = payload.prompt.strip()
-    if not prompt_text:
-        raise HTTPException(400, 'Empty prompt')
-
-    result = agent_tools.insert_food(prompt_text)
-
-    if result.get('status') == 'error':
-        raise HTTPException(500, result.get('message'))
-
-    return result
 
 
 # ============================
