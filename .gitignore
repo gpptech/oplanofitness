@@ -1,0 +1,52 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.Python
+
+# Virtual Environments
+venv/
+env/
+.venv/
+.conda/
+conda-env/
+
+# Environment Variables
+.env
+.env.local
+
+# Build
+.vite/
+
+# Database Backups
+*backup*.db
+*.db-journal
+
+# Logs
+*.log
+vite_output.log
+vite_ready.txt
+
+# Archives
+nao_essenciais/
+data/gestor_alimentos_package.zip
+data/base_alimentos_otimizada_para_impressao.pdf
+
+# Claude
+.claude/

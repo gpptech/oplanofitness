@@ -1,0 +1,12 @@
+# FastAPI Backend - Versões Testadas e Compatíveis
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-dotenv==1.0.1
+pydantic==2.12.2
+openai==1.11.1
+httpx==0.27.0  # IMPORTANTE: 0.28+ incompatível com openai 1.11.1
+
+# Dependências opcionais (para análise de dados)
+pandas>=2.2.2
+scikit-learn>=1.3.0
+numpy>=1.24.0

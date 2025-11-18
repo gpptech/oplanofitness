@@ -1,0 +1,1 @@
+DELETE FROM alimentos WHERE nome='teste'

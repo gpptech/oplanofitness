@@ -1,0 +1,11 @@
+id,nome,categoria,porcao_g,kcal,prot_g,carb_g,gord_g,contexto_culinario,incompativel_com,cluster_nutricional,kcal_por_g,prot_por_g,preco,percentual_proteico,velocidade_absorcao
+1,Bife de contra-filé na frigideira com alho,Carne Vermelha,150.0,420.0,49.0,0.0,23.0,Almoço|Jantar,Café|Lanche|Lixo,4,2.8,0.3,$$,0.32,Média
+2,Bife de alcatra na frigideira com alho,Carne Vermelha,150.0,360.0,54.0,0.0,15.0,Almoço|Jantar,Café|Lanche|Lixo,4,2.4,0.4,$$$,0.36,Média
+3,Bife de patinho na frigideira com alho,Carne Vermelha,150.0,290.0,54.0,0.0,10.0,Almoço|Jantar,Café|Lanche|Lixo,4,1.9,0.4,$$,0.37,Média
+4,Bife de coxão mole na frigideira,Carne Vermelha,150.0,300.0,52.0,0.0,11.0,Almoço|Jantar,Café|Lanche|Lixo,4,2.0,0.3,$$,0.35,Média
+5,Carne moída refogada (70% magra),Carne Vermelha,150.0,370.0,35.0,2.0,26.0,Almoço,Café|Lanche|Jantar|Lixo,4,2.5,0.2,$$,0.23,Média
+6,Carne moída refogada (80% magra),Carne Vermelha,150.0,310.0,38.0,2.0,18.0,Almoço|Jantar,Café|Lanche|Lixo,4,2.1,0.3,$$,0.25,Média
+7,Carne moída com legumes (cenoura batata),Carne Vermelha,200.0,350.0,32.0,20.0,16.0,Almoço|Jantar,Café|Lanche|Lixo,4,1.8,0.2,$$,0.16,Média
+8,Hambúrguer caseiro na frigideira,Carne Vermelha,120.0,310.0,30.0,3.0,21.0,Almoço|Jantar,Café|Lanche|Lixo,4,2.6,0.2,$$,0.25,Média
+9,Picadinho de carne com cebola,Carne Vermelha,150.0,320.0,40.0,5.0,16.0,Almoço|Jantar,Café|Lanche|Lixo,4,2.1,0.3,$$,0.27,Média
+10,Picanha na frigideira em tiras,Carne Vermelha,150.0,400.0,35.0,0.0,31.0,Almoço,Café|Lanche|Jantar|Lixo,4,2.7,0.2,$$$$,0.23,Média

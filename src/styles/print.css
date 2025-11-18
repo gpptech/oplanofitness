@@ -1,0 +1,64 @@
+/* ==============================================
+   PRINT STYLES - MEAL PLANNER PDF EXPORT
+   Mantém o layout visual idêntico à web
+   ============================================== */
+
+/* Screen styles (esconde printable-content na tela) */
+.printable-content {
+  display: none;
+}
+
+/* Print mode - Show only printable content */
+@media print {
+  /* Reset body margins */
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Hide main app content during print */
+  body > div > div:not(.printable-content) {
+    display: none !important;
+  }
+
+  /* Show printable content */
+  .printable-content {
+    display: block !important;
+  }
+
+  /* Preserve colors and backgrounds */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Page break configuration */
+  .print-page {
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+
+  /* Remove page break from last page */
+  .print-page:last-child {
+    page-break-after: auto;
+  }
+
+  /* Landscape orientation hint for page 1 (browser may ignore) */
+  @page landscape {
+    size: A4 landscape;
+  }
+
+  .print-page-landscape {
+    page: landscape;
+  }
+
+  /* Portrait orientation hint for page 2+ (browser may ignore) */
+  @page portrait {
+    size: A4 portrait;
+  }
+
+  .print-page-portrait {
+    page: portrait;
+  }
+}

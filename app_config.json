@@ -1,0 +1,281 @@
+{
+  "visual": {
+    "cafe": {
+      "emoji": "☕",
+      "label": "Café"
+    },
+    "lanche": {
+      "emoji": "🥪",
+      "label": "Lanche"
+    },
+    "almoco": {
+      "emoji": "🍽️",
+      "label": "Almoço"
+    },
+    "jantar": {
+      "emoji": "🥩",
+      "label": "Jantar"
+    },
+    "whey": {
+      "emoji": "💪",
+      "label": "Whey"
+    },
+    "lixo": {
+      "emoji": "🍕",
+      "label": "Lixo"
+    }
+  },
+  "metasPadrao": {
+    "cafe": {
+      "prot": 24,
+      "carb": 35,
+      "gord": 10,
+      "kcal": 320
+    },
+    "lanche": {
+      "prot": 18,
+      "carb": 25,
+      "gord": 7,
+      "kcal": 250
+    },
+    "almoco": {
+      "prot": 34,
+      "carb": 60,
+      "gord": 8,
+      "kcal": 410
+    },
+    "jantar": {
+      "prot": 37,
+      "carb": 0,
+      "gord": 8,
+      "kcal": 260
+    },
+    "whey": {
+      "prot": 27,
+      "carb": 8,
+      "gord": 3,
+      "kcal": 167
+    },
+    "lixo": {
+      "prot": 15,
+      "carb": 350,
+      "gord": 80,
+      "kcal": 2180
+    }
+  },
+  "tipoOrder": ["cafe", "almoco", "lanche", "whey", "jantar", "lixo"],
+  "timeline": {
+    "primeiroDia": "SEG",
+    "horaInicio": 6,
+    "horaFim": 24
+  },
+  "diasSemana": ["SEG", "TER", "QUA", "QUI", "SEX", "SAB", "DOM"],
+  "refeicoesPadrao": {
+    "SEG": [
+      {
+        "id": "seg-cafe",
+        "hora": 8,
+        "tipo": "cafe",
+        "nome": "Café"
+      },
+      {
+        "id": "seg-almoco",
+        "hora": 12,
+        "tipo": "almoco",
+        "nome": "Almoço"
+      },
+      {
+        "id": "seg-lanche",
+        "hora": 16,
+        "tipo": "lanche",
+        "nome": "Lanche"
+      },
+      {
+        "id": "seg-whey",
+        "hora": 20,
+        "tipo": "whey",
+        "nome": "Whey"
+      },
+      {
+        "id": "seg-jantar",
+        "hora": 21,
+        "tipo": "jantar",
+        "nome": "Jantar"
+      }
+    ],
+    "TER": [
+      {
+        "id": "ter-cafe",
+        "hora": 8,
+        "tipo": "cafe",
+        "nome": "Café"
+      },
+      {
+        "id": "ter-almoco",
+        "hora": 12,
+        "tipo": "almoco",
+        "nome": "Almoço"
+      },
+      {
+        "id": "ter-lanche",
+        "hora": 16,
+        "tipo": "lanche",
+        "nome": "Lanche"
+      },
+      {
+        "id": "ter-whey",
+        "hora": 20,
+        "tipo": "whey",
+        "nome": "Whey"
+      },
+      {
+        "id": "ter-jantar",
+        "hora": 21,
+        "tipo": "jantar",
+        "nome": "Jantar"
+      }
+    ],
+    "QUA": [
+      {
+        "id": "qua-almoco",
+        "hora": 12,
+        "tipo": "almoco",
+        "nome": "Almoço"
+      },
+      {
+        "id": "qua-lanche",
+        "hora": 16,
+        "tipo": "lanche",
+        "nome": "Lanche"
+      },
+      {
+        "id": "qua-whey",
+        "hora": 20,
+        "tipo": "whey",
+        "nome": "Whey"
+      },
+      {
+        "id": "qua-jantar",
+        "hora": 21,
+        "tipo": "jantar",
+        "nome": "Jantar"
+      }
+    ],
+    "QUI": [
+      {
+        "id": "qui-almoco",
+        "hora": 12,
+        "tipo": "almoco",
+        "nome": "Almoço"
+      },
+      {
+        "id": "qui-lanche",
+        "hora": 16,
+        "tipo": "lanche",
+        "nome": "Lanche"
+      },
+      {
+        "id": "qui-whey",
+        "hora": 20,
+        "tipo": "whey",
+        "nome": "Whey"
+      },
+      {
+        "id": "qui-jantar",
+        "hora": 21,
+        "tipo": "jantar",
+        "nome": "Jantar"
+      }
+    ],
+    "SEX": [
+      {
+        "id": "sex-cafe",
+        "hora": 8,
+        "tipo": "cafe",
+        "nome": "Café"
+      },
+      {
+        "id": "sex-almoco",
+        "hora": 12,
+        "tipo": "almoco",
+        "nome": "Almoço"
+      },
+      {
+        "id": "sex-lanche",
+        "hora": 16,
+        "tipo": "lanche",
+        "nome": "Lanche"
+      },
+      {
+        "id": "sex-whey",
+        "hora": 20,
+        "tipo": "whey",
+        "nome": "Whey"
+      },
+      {
+        "id": "sex-jantar",
+        "hora": 21,
+        "tipo": "jantar",
+        "nome": "Jantar"
+      }
+    ],
+    "SAB": [
+      {
+        "id": "sab-cafe",
+        "hora": 9,
+        "tipo": "cafe",
+        "nome": "Café"
+      },
+      {
+        "id": "sab-almoco",
+        "hora": 13,
+        "tipo": "almoco",
+        "nome": "Almoço"
+      },
+      {
+        "id": "sab-lanche",
+        "hora": 17,
+        "tipo": "lanche",
+        "nome": "Lanche"
+      },
+      {
+        "id": "sab-whey",
+        "hora": 11,
+        "tipo": "whey",
+        "nome": "Whey"
+      },
+      {
+        "id": "sab-lixo",
+        "hora": 21,
+        "tipo": "lixo",
+        "nome": "Lixo"
+      }
+    ],
+    "DOM": [
+      {
+        "id": "dom-cafe",
+        "hora": 9,
+        "tipo": "cafe",
+        "nome": "Café"
+      },
+      {
+        "id": "dom-almoco",
+        "hora": 13,
+        "tipo": "almoco",
+        "nome": "Almoço"
+      },
+      {
+        "id": "dom-lanche",
+        "hora": 17,
+        "tipo": "lanche",
+        "nome": "Lanche"
+      },
+      {
+        "id": "dom-jantar",
+        "hora": 19,
+        "tipo": "jantar",
+        "nome": "Jantar"
+      }
+    ]
+  }
+}
