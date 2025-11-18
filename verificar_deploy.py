@@ -110,11 +110,13 @@ def main():
                 changes = result.stdout.strip()
                 if changes:
                     print(f"{YELLOW}[WARN] Existem mudancas nao commitadas:{RESET}")
-                    lines = changes.split('\n')[:10]  # Mostrar primeiras 10
+                    all_lines = changes.split('\n')
+                    lines = all_lines[:10]  # Mostrar primeiras 10
                     for line in lines:
                         print(f"   {line}")
-                    if len(changes.split('\n')) > 10:
-                        print(f"   ... e mais {len(changes.split('\n')) - 10} arquivos")
+                    remaining = len(all_lines) - 10
+                    if remaining > 0:
+                        print(f"   ... e mais {remaining} arquivos")
                 else:
                     print(f"{GREEN}[OK] Nenhuma mudanca pendente{RESET}")
 

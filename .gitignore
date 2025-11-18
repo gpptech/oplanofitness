@@ -38,6 +38,9 @@ conda-env/
 *backup*.db
 *.db-journal
 
+# IMPORTANTE: Database principal deve ir para o Git (necessário para deploy)
+!data/db/alimentos.db
+
 # Logs
 *.log
 vite_output.log
