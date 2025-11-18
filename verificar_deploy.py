@@ -35,9 +35,7 @@ def main():
     print(f"{BOLD}1. Arquivos Essenciais:{RESET}")
     all_ok &= check(Path('requirements.txt').exists(), "requirements.txt existe")
     all_ok &= check(Path('.env.example').exists(), ".env.example existe")
-    all_ok &= check(Path('TUTORIAL_PYTHONANYWHERE.md').exists(), "TUTORIAL_PYTHONANYWHERE.md existe")
-    all_ok &= check(Path('README_DEPLOY.md').exists(), "README_DEPLOY.md existe")
-    all_ok &= check(Path('CHECKLIST_DEPLOY.md').exists(), "CHECKLIST_DEPLOY.md existe")
+    all_ok &= check(Path('DEPLOY_GUIDE.md').exists(), "DEPLOY_GUIDE.md existe (guia unificado)")
     print()
 
     # 2. Build de produção
@@ -151,7 +149,7 @@ def main():
         print("2. git add .")
         print('3. git commit -m "feat: prepara para PythonAnywhere"')
         print("4. git push")
-        print("5. Seguir TUTORIAL_PYTHONANYWHERE.md")
+        print("5. Seguir DEPLOY_GUIDE.md")
     else:
         print(f"{RED}{BOLD}[ERROR] PROBLEMAS ENCONTRADOS{RESET}")
         print(f"\n{BOLD}Corrija os itens marcados com [FAIL] antes do deploy.{RESET}")
