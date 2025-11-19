@@ -1,15 +1,12 @@
 # Backend Python Dependencies - Plano Alimentar
 # Para instalar: pip install -r requirements.txt
 
-# Web Framework
+# Web Framework (ASGI)
 fastapi==0.115.6
 uvicorn[standard]==0.34.0
 
 # Data Validation
 pydantic==2.10.5
 
-# CORS Middleware (já incluído no FastAPI)
-# starlette (dependency do FastAPI) fornece CORSMiddleware
-
-# ASGI-to-WSGI Adapter (necessário para PythonAnywhere)
-asgiref==3.8.1
+# CORS Middleware (incluído no FastAPI via starlette)
+# Nenhuma dependência adicional necessária

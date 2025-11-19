@@ -4,22 +4,24 @@ const ENV = import.meta.env;
 
 /**
  * Determina a base URL da API automaticamente:
- * - Em dev (Vite): usa proxy ou VITE_API_URL
- * - Em produção (build): usa mesma origem (window.location.origin)
+ * - Em dev (Vite): usa VITE_API_URL ou localhost
+ * - Em produção (Render): usa URL da API separada
  */
 function getApiBaseUrl(): string {
-  // Se VITE_API_URL está definido, use (dev)
+  // Se VITE_API_URL está definido, use (dev ou override)
   if (ENV.VITE_API_URL) {
     return ENV.VITE_API_URL;
   }
 
-  // Em produção, FastAPI serve frontend + API na mesma porta
-  // Então podemos usar a mesma origem (https://seunome.pythonanywhere.com)
-  if (typeof window !== 'undefined') {
-    return window.location.origin;
+  // Em produção no Render: frontend e backend são serviços separados
+  // Frontend: https://oplanofitness-app.onrender.com
+  // Backend:  https://oplanofitness-api.onrender.com
+  if (typeof window !== 'undefined' && window.location.hostname.includes('onrender.com')) {
+    // Se estamos no frontend app, apontar para o backend API
+    return 'https://oplanofitness-api.onrender.com';
   }
 
-  // Fallback (não deveria acontecer)
+  // Fallback para dev local
   return 'http://localhost:8001';
 }
 

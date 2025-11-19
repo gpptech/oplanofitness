@@ -20,11 +20,10 @@ DIST_PATH = Path(__file__).parent.parent.parent / "dist"
 
 app = FastAPI(title="Gestor Alimentos API", version="2.0.0")
 
-# CORS - permite localhost (dev) e PythonAnywhere (produção)
-# NOTA: Wildcards não funcionam em allow_origins. Usar allow_origin_regex
+# CORS - permite localhost (dev) e Render (produção)
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex=r"https://.*\.pythonanywhere\.com",  # Qualquer subdomínio PythonAnywhere
+    allow_origin_regex=r"https://.*\.onrender\.com",  # Qualquer subdomínio Render
     allow_origins=[
         "http://localhost:5173",  # Vite dev
         "http://localhost:3000",  # Alternativo
