@@ -297,8 +297,8 @@ import sys
 import os
 from pathlib import Path
 
-# ⚠️ SUBSTITUA 'SEUNOME' pelo seu username do PythonAnywhere!
-USERNAME = 'SEUNOME'  # <-- MUDE AQUI
+# ⚠️ SUBSTITUA 'oplanofitness' pelo seu username do PythonAnywhere!
+USERNAME = 'oplanofitness'  # <-- MUDE AQUI
 
 # Adicionar pasta do projeto ao PYTHONPATH
 project_home = f'/home/{USERNAME}/oplanofitness'
@@ -320,9 +320,9 @@ from gestor_alimentos_api import app as application
 ### 3. Configurar Virtualenv
 
 1. Role para baixo até **"Virtualenv"**
-2. Cole o caminho (SUBSTITUA `SEUNOME`):
+2. Cole o caminho:
    ```
-   /home/SEUNOME/oplanofitness/venv
+   /home/oplanofitness/oplanofitness/venv
    ```
 3. Clique no **✅ verde** para confirmar
 
@@ -333,14 +333,13 @@ from gestor_alimentos_api import app as application
 
 **Entrada 1 - Assets (obrigatória):**
 - **URL:** `/assets`
-- **Directory:** `/home/SEUNOME/oplanofitness/dist/assets`
+- **Directory:** `/home/oplanofitness/oplanofitness/dist/assets`
 
 **Entrada 2 - Root (opcional, melhora performance):**
 - **URL:** `/`
-- **Directory:** `/home/SEUNOME/oplanofitness/dist`
+- **Directory:** `/home/oplanofitness/oplanofitness/dist`
 
-3. **Substitua `SEUNOME`** pelo seu username
-4. Clique no ✅ verde em cada entrada
+1. Clique no ✅ verde em cada entrada
 
 ### 5. Recarregar Web App
 
