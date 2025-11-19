@@ -20,10 +20,10 @@ DIST_PATH = Path(__file__).parent.parent.parent / "dist"
 
 app = FastAPI(title="Gestor Alimentos API", version="2.0.0")
 
-# CORS - permite localhost (dev) e Render (produção)
+# CORS - permite localhost (dev), Render e Railway (produção)
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex=r"https://.*\.onrender\.com",  # Qualquer subdomínio Render
+    allow_origin_regex=r"https://.*\.(onrender\.com|railway\.app|up\.railway\.app)",  # Render e Railway
     allow_origins=[
         "http://localhost:5173",  # Vite dev
         "http://localhost:3000",  # Alternativo
