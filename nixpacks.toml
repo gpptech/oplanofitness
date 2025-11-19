@@ -1,17 +1,11 @@
-# Nixpacks configuration for Railway deployment
+# Nixpacks configuration for Railway deployment - Backend only
 # Docs: https://nixpacks.com/docs/configuration/file
 
 [phases.setup]
-nixPkgs = ["python311", "nodejs_20"]
+nixPkgs = ["python311"]
 
 [phases.install]
-cmds = [
-  "pip install -r requirements.txt",
-  "npm install"
-]
-
-[phases.build]
-cmds = ["npm run build"]
+cmds = ["pip install -r requirements.txt"]
 
 [start]
 cmd = "cd data/api && uvicorn gestor_alimentos_api:app --host 0.0.0.0 --port $PORT"
