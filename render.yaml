@@ -16,8 +16,7 @@ services:
   # Frontend - React
   - type: web
     name: oplanofitness-app
-    env: static
-    plan: starter
+    runtime: static
     buildCommand: "npm install && npm run build"
     staticPublishPath: ./dist
     pullRequestPreviewsEnabled: true
