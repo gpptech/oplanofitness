@@ -28,8 +28,8 @@
 - ✅ App público em `https://seunome.pythonanywhere.com`
 - ✅ Frontend React funcionando
 - ✅ Backend FastAPI com API REST
-- ✅ AI Agent GPT-4 integrado
 - ✅ Database SQLite com 121 alimentos
+- ✅ Sistema 100% offline (sem dependências externas)
 
 ---
 
@@ -39,13 +39,10 @@
 - ✅ **GitHub** (gratuito) - [github.com](https://github.com)
 - ✅ **PythonAnywhere** (plano Beginner gratuito) - [pythonanywhere.com](https://pythonanywhere.com)
 
-### Chaves de API
-- ✅ **OpenAI API Key** - Para o AI Agent funcionar
-
 ### Software Local
 - ✅ **Git** instalado e configurado
-- ✅ **Python 3.11+** (para testes locais)
-- ✅ **Node.js 18+** (para build do frontend)
+- ✅ **Python 3.11+** (para testes locais - opcional)
+- ✅ **Node.js 18+** (para build do frontend - opcional se já tem dist/)
 
 ---
 
@@ -91,8 +88,7 @@ dir "data\db\alimentos.db"
 - [ ] Pasta `dist/` existe com build
 - [ ] Arquivo `data/db/alimentos.db` existe
 - [ ] Arquivo `requirements.txt` existe
-- [ ] Arquivo `.env.example` existe
-- [ ] Arquivo `.env` NÃO está no Git (verificar .gitignore)
+- [ ] Arquivo `.env.example` existe (opcional - app funciona sem .env)
 - [ ] Build de produção está atualizado
 
 ---
@@ -103,7 +99,7 @@ dir "data\db\alimentos.db"
 
 1. Acesse [github.com/new](https://github.com/new)
 2. Configure:
-   - **Nome:** `plano-alimentar` (ou outro)
+   - **Nome:** `oplanofitness` (ou outro)
    - **Visibilidade:** Public ou Private
    - **NÃO** marque: README, .gitignore, license (já temos)
 3. Clique em **"Create repository"**
@@ -170,7 +166,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 
 ```bash
 # Adicionar remote (SUBSTITUA pela URL do seu repositório)
-git remote add origin https://github.com/SEU-USUARIO/plano-alimentar.git
+git remote add origin https://github.com/SEU-USUARIO/oplanofitness.git
 
 # Verificar branch
 git branch -M main
@@ -207,10 +203,10 @@ git push -u origin main
 cd ~
 
 # Clonar seu repositório (SUBSTITUA pela URL do SEU repo)
-git clone https://github.com/SEU-USUARIO/plano-alimentar.git
+git clone https://github.com/SEU-USUARIO/oplanofitness.git
 
 # Entrar na pasta
-cd plano-alimentar
+cd oplanofitness
 
 # Verificar conteúdo
 ls -la
@@ -243,30 +239,14 @@ python --version
 pip install -r requirements.txt
 ```
 
-**Aguarde ~2-3 minutos** enquanto instala FastAPI, OpenAI, Uvicorn, etc.
+**Aguarde ~1-2 minutos** enquanto instala FastAPI, Uvicorn, Pydantic.
 
 **Verificar instalação:**
 ```bash
-pip list | grep -E "fastapi|openai|uvicorn"
+pip list | grep -E "fastapi|uvicorn|pydantic"
 ```
 
-### 6. Configurar Variáveis de Ambiente
-
-```bash
-# Copiar template
-cp .env.example .env
-
-# Editar .env
-nano .env
-```
-
-**No editor nano:**
-1. Localize a linha: `OPENAI_API_KEY=sk-proj-your-actual-api-key-here`
-2. Substitua pela sua **chave real da OpenAI**
-3. **Salvar:** `Ctrl + O` → `Enter`
-4. **Sair:** `Ctrl + X`
-
-### 7. Testar Localmente (Opcional)
+### 6. Testar Localmente (Opcional)
 
 ```bash
 # Verificar database
@@ -284,7 +264,7 @@ Aperte `Ctrl + C` para parar.
 
 ```bash
 # Voltar para raiz do projeto
-cd ~/plano-alimentar
+cd ~/oplanofitness
 ```
 
 ---
@@ -321,7 +301,7 @@ from pathlib import Path
 USERNAME = 'SEUNOME'  # <-- MUDE AQUI
 
 # Adicionar pasta do projeto ao PYTHONPATH
-project_home = f'/home/{USERNAME}/plano-alimentar'
+project_home = f'/home/{USERNAME}/oplanofitness'
 if project_home not in sys.path:
     sys.path.insert(0, project_home)
 
@@ -329,11 +309,6 @@ if project_home not in sys.path:
 api_path = str(Path(project_home) / 'data' / 'api')
 if api_path not in sys.path:
     sys.path.insert(0, api_path)
-
-# Carregar variáveis de ambiente do .env
-from dotenv import load_dotenv
-env_path = Path(project_home) / '.env'
-load_dotenv(dotenv_path=env_path)
 
 # Importar aplicação FastAPI
 from gestor_alimentos_api import app as application
@@ -347,7 +322,7 @@ from gestor_alimentos_api import app as application
 1. Role para baixo até **"Virtualenv"**
 2. Cole o caminho (SUBSTITUA `SEUNOME`):
    ```
-   /home/SEUNOME/plano-alimentar/venv
+   /home/SEUNOME/oplanofitness/venv
    ```
 3. Clique no **✅ verde** para confirmar
 
@@ -358,11 +333,11 @@ from gestor_alimentos_api import app as application
 
 **Entrada 1 - Assets (obrigatória):**
 - **URL:** `/assets`
-- **Directory:** `/home/SEUNOME/plano-alimentar/dist/assets`
+- **Directory:** `/home/SEUNOME/oplanofitness/dist/assets`
 
 **Entrada 2 - Root (opcional, melhora performance):**
 - **URL:** `/`
-- **Directory:** `/home/SEUNOME/plano-alimentar/dist`
+- **Directory:** `/home/SEUNOME/oplanofitness/dist`
 
 3. **Substitua `SEUNOME`** pelo seu username
 4. Clique no ✅ verde em cada entrada
@@ -402,17 +377,12 @@ Clique no link: **`https://seunome.pythonanywhere.com`**
 2. **Esperado:** Cards de refeições pré-configuradas
 3. **Teste filtros:** Filtrar por tipo (café, almoço, jantar)
 
-#### Teste 3: Chat IA (requer OpenAI API Key)
-1. Clique em **"Modo: Chat IA"**
-2. Digite: `liste 5 alimentos da categoria proteína`
-3. **Esperado:** Resposta do agente com lista de alimentos
-
-#### Teste 4: Timeline Semanal
+#### Teste 3: Timeline Semanal
 1. Clique em **"Modo: Agenda"**
 2. **Esperado:** Timeline visual com refeições e janelas de jejum
 3. **Teste drag:** Arrastar refeições (se implementado)
 
-#### Teste 5: Criar Refeição
+#### Teste 4: Criar Refeição
 1. Clique em **"Modo: Config"** → aba **"Nova Refeição"**
 2. Preencha:
    - Nome: "Teste Deploy"
@@ -467,7 +437,7 @@ git push
 # Abrir console Bash no PythonAnywhere
 
 # Ir para projeto
-cd ~/plano-alimentar
+cd ~/oplanofitness
 
 # Puxar mudanças
 git pull origin main
@@ -485,6 +455,81 @@ pip install -r requirements.txt
 
 ✅ **Pronto!** Mudanças aplicadas.
 
+### ❓ FAQ - Perguntas Frequentes sobre Deploy
+
+#### **P: O venv do PythonAnywhere afeta meu repositório Git?**
+
+**R:** ❌ **NÃO.** O `venv/` é uma pasta **local** que:
+
+- Existe apenas no servidor PythonAnywhere
+- Está no `.gitignore` (nunca vai para o Git)
+- Pode ser deletada e recriada sem perder dados
+- É independente do venv na sua máquina Windows
+
+**Resumo:** Cada ambiente tem seu próprio venv separado.
+
+---
+
+#### **P: Quando faço `git push`, o PythonAnywhere atualiza automaticamente?**
+
+**R:** ❌ **NÃO.** O processo é **manual**:
+
+1. ✅ Você faz `git push` → código vai para **GitHub**
+2. ❌ PythonAnywhere **NÃO detecta** automaticamente
+3. ✅ Você precisa **manualmente**:
+   - Abrir Bash Console no PythonAnywhere
+   - Rodar `cd ~/oplanofitness && git pull`
+   - Clicar em "Reload" na aba Web
+
+**Por quê?** O plano gratuito não tem CI/CD automático.
+
+---
+
+#### **P: Como funciona o venv?**
+
+**R:**
+
+**Sua máquina:**
+
+```text
+d:\Cursor Projects\oplanofitness\
+└── venv\  ← Python Windows + deps instaladas aqui
+    ├── Scripts\
+    └── Lib\
+```
+
+**PythonAnywhere:**
+
+```text
+/home/seunome/oplanofitness/
+└── venv/  ← Python Linux + deps instaladas aqui
+    ├── bin/
+    └── lib/
+```
+
+**São completamente independentes!** Git ignora ambos.
+
+---
+
+#### **P: Se eu deletar o venv no PythonAnywhere, perco dados?**
+
+**R:** ❌ **NÃO perde dados.** Perde apenas:
+
+- Bibliotecas Python instaladas (FastAPI, etc.)
+- **Mas NÃO perde:** código, database, configurações
+
+**Para recriar:**
+
+```bash
+cd ~/oplanofitness
+python3.11 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+# Reload web app
+```
+
+---
+
 ### Cenários Específicos
 
 #### Mudou apenas frontend (HTML/CSS/JS/TS/TSX):
@@ -496,7 +541,7 @@ git commit -m "update: frontend changes"
 git push
 
 # PythonAnywhere
-cd ~/plano-alimentar
+cd ~/oplanofitness
 git pull
 # Reload na aba Web
 ```
@@ -509,7 +554,7 @@ git commit -m "update: backend changes"
 git push
 
 # PythonAnywhere
-cd ~/plano-alimentar
+cd ~/oplanofitness
 git pull
 # Reload na aba Web
 ```
@@ -522,7 +567,7 @@ git commit -m "update: database changes"
 git push
 
 # PythonAnywhere
-cd ~/plano-alimentar
+cd ~/oplanofitness
 git pull
 # Reload na aba Web
 ```
@@ -535,7 +580,7 @@ git commit -m "update: dependencies"
 git push
 
 # PythonAnywhere
-cd ~/plano-alimentar
+cd ~/oplanofitness
 git pull
 source venv/bin/activate
 pip install -r requirements.txt
@@ -565,7 +610,7 @@ git commit -m "add: frontend build"
 git push
 
 # PythonAnywhere - Puxar mudanças
-cd ~/plano-alimentar
+cd ~/oplanofitness
 git pull
 
 # Verificar que dist/ existe
@@ -576,7 +621,7 @@ ls -la dist/
 ```
 
 **Verificar configuração de Static Files:**
-- URL: `/assets` → Directory: `/home/SEUNOME/plano-alimentar/dist/assets`
+- URL: `/assets` → Directory: `/home/SEUNOME/oplanofitness/dist/assets`
 - Verificar se o caminho está correto (substituiu SEUNOME?)
 
 ### Erro: "Database not found"
@@ -596,16 +641,16 @@ git commit -m "add: database"
 git push
 
 # PythonAnywhere - Puxar e verificar
-cd ~/plano-alimentar
+cd ~/oplanofitness
 git pull
 ls -lh data/db/alimentos.db
 # Deve mostrar arquivo ~1.6 MB
 
 # Se não existir, clonar novamente
 cd ~
-rm -rf plano-alimentar
-git clone https://github.com/SEU-USUARIO/plano-alimentar.git
-cd plano-alimentar
+rm -rf oplanofitness
+git clone https://github.com/SEU-USUARIO/oplanofitness.git
+cd oplanofitness
 source venv/bin/activate
 pip install -r requirements.txt
 # Reload web app
@@ -624,7 +669,7 @@ pip install -r requirements.txt
 **ImportError: No module named 'X'**
 ```bash
 # Dependência faltando
-cd ~/plano-alimentar
+cd ~/oplanofitness
 source venv/bin/activate
 pip install X
 # Reload web app
@@ -641,7 +686,7 @@ allow_origin_regex=r"https://.*\.pythonanywhere\.com",
 ```bash
 # Verificar caminhos no WSGI
 # Deve usar Path absolutos:
-project_home = f'/home/{USERNAME}/plano-alimentar'
+project_home = f'/home/{USERNAME}/oplanofitness'
 ```
 
 ### Erro: "CORS blocked"
@@ -676,56 +721,9 @@ git commit -m "fix: CORS with regex"
 git push
 
 # PythonAnywhere
-cd ~/plano-alimentar
+cd ~/oplanofitness
 git pull
 # Reload web app
-```
-
-### Erro: AI Agent não funciona
-
-**Sintoma:** Chat IA retorna erro ou não responde.
-
-**Causas possíveis:**
-1. `OPENAI_API_KEY` não configurada
-2. API Key inválida/expirada
-3. Sem créditos na conta OpenAI
-
-**Soluções:**
-
-```bash
-# PythonAnywhere - Verificar .env
-cd ~/plano-alimentar
-cat .env
-# Deve mostrar: OPENAI_API_KEY=sk-...
-
-# Se não existir ou estiver errado:
-nano .env
-# Adicionar/corrigir chave
-# Ctrl+O, Enter, Ctrl+X
-
-# Reload web app
-```
-
-**Testar chave da OpenAI:**
-```bash
-# No Bash do PythonAnywhere
-cd ~/plano-alimentar
-source venv/bin/activate
-python
-
-# No Python REPL:
->>> from dotenv import load_dotenv
->>> import os
->>> load_dotenv('.env')
->>> os.getenv('OPENAI_API_KEY')
-# Deve mostrar sua chave
-
->>> # Testar conexão
->>> from openai import OpenAI
->>> client = OpenAI()
->>> client.models.list()
-# Se funcionar, chave está OK
->>> exit()
 ```
 
 ### Erro: "Permission denied" no PythonAnywhere
@@ -736,7 +734,7 @@ python
 
 ```bash
 # Verificar permissões
-cd ~/plano-alimentar
+cd ~/oplanofitness
 ls -la
 
 # Corrigir permissões se necessário
@@ -1059,19 +1057,17 @@ git commit -m "deploy: ready for production"
 git push
 
 # 2. PYTHONANYWHERE
-git clone https://github.com/SEU-USUARIO/plano-alimentar.git
-cd plano-alimentar
+git clone https://github.com/SEU-USUARIO/oplanofitness.git
+cd oplanofitness
 python3.11 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env
-nano .env  # Adicionar OPENAI_API_KEY
 
 # 3. WEB APP
 # - Manual configuration → Python 3.11
-# - WSGI: colar código do guia
-# - Virtualenv: /home/SEUNOME/plano-alimentar/venv
-# - Static files: /assets → /home/SEUNOME/plano-alimentar/dist/assets
+# - WSGI: colar código do guia (SEM dotenv)
+# - Virtualenv: /home/SEUNOME/oplanofitness/venv
+# - Static files: /assets → /home/SEUNOME/oplanofitness/dist/assets
 # - Reload
 
 # 4. ACESSAR
@@ -1087,8 +1083,8 @@ Seguindo este guia, você terá:
 ✅ **App público** em produção
 ✅ **Frontend React** otimizado
 ✅ **Backend FastAPI** funcional
-✅ **AI Agent GPT-4** integrado
 ✅ **Database SQLite** com 121 alimentos
+✅ **Sistema 100% offline** (sem APIs externas)
 ✅ **Zero vulnerabilidades** de segurança
 ✅ **Workflow** de updates estabelecido
 
