@@ -296,6 +296,7 @@ cd ~/oplanofitness
 import sys
 import os
 from pathlib import Path
+from asgiref.wsgi import WsgiToAsgi
 
 # ⚠️ SUBSTITUA 'oplanofitness' pelo seu username do PythonAnywhere!
 USERNAME = 'oplanofitness'  # <-- MUDE AQUI
@@ -311,7 +312,11 @@ if api_path not in sys.path:
     sys.path.insert(0, api_path)
 
 # Importar aplicação FastAPI
-from gestor_alimentos_api import app as application
+from gestor_alimentos_api import app
+
+# IMPORTANTE: FastAPI é ASGI, mas PythonAnywhere usa WSGI
+# Precisamos converter ASGI → WSGI usando asgiref
+application = WsgiToAsgi(app)
 ```
 
 5. **IMPORTANTE:** Substitua `SEUNOME` pelo seu username real (está no topo da página)
@@ -742,6 +747,45 @@ chmod -R 755 .
 # Database deve ser read/write
 chmod 644 data/db/alimentos.db
 ```
+
+### Erro: "FastAPI.__call__() missing 1 required positional argument: 'send'"
+
+**Sintoma:** Error log mostra `TypeError: FastAPI.__call__() missing 1 required positional argument: 'send'`
+
+**Causa:** FastAPI é uma aplicação **ASGI**, mas PythonAnywhere usa **WSGI** (uWSGI). Eles são incompatíveis sem um adaptador.
+
+**Solução:**
+
+1. **Instalar `asgiref` no PythonAnywhere:**
+   ```bash
+   cd ~/oplanofitness
+   source venv/bin/activate
+   pip install asgiref
+   ```
+
+2. **Atualizar o arquivo WSGI:**
+   - No PythonAnywhere, aba **"Web"** → **"WSGI configuration file"**
+   - Adicionar `from asgiref.wsgi import WsgiToAsgi` no topo
+   - Mudar a última linha de:
+     ```python
+     from gestor_alimentos_api import app as application
+     ```
+     Para:
+     ```python
+     from gestor_alimentos_api import app
+     application = WsgiToAsgi(app)
+     ```
+
+3. **Salvar o arquivo WSGI** e clicar em **"Reload"** na aba Web
+
+4. **Verificar:** Acessar `/api/alimentos` deve retornar JSON
+
+**Explicação técnica:**
+- **ASGI** (Async Server Gateway Interface) → FastAPI, Starlette
+- **WSGI** (Web Server Gateway Interface) → Django, Flask
+- `asgiref.wsgi.WsgiToAsgi` converte aplicações ASGI para rodar em servidores WSGI
+
+---
 
 ### Frontend carrega mas API não funciona
 
