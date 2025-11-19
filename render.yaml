@@ -14,8 +14,9 @@ services:
         value: ../../data/db/alimentos.db
 
   # Frontend - React
-  - type: static
+  - type: web
     name: oplanofitness-app
+    env: static
     plan: starter
     buildCommand: "npm install && npm run build"
     staticPublishPath: ./dist
