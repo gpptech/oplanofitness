@@ -601,25 +601,25 @@ export default function MealPlanner() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-50 text-gray-800">
       {/* Menu lateral escondível */}
       {menuAberto && (
         <>
           {/* Overlay escuro */}
           <div
-            className="fixed inset-0 bg-black bg-opacity-30 z-40 transition-opacity"
+            className="fixed inset-0 bg-black bg-opacity-40 z-40 transition-opacity backdrop-blur-sm"
             onClick={() => setMenuAberto(false)}
           />
           {/* Menu */}
-          <div className="fixed top-0 left-0 h-full w-64 bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out">
+          <div className="fixed top-0 left-0 h-full w-72 bg-gradient-to-br from-white to-gray-50 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out border-r-2 border-gray-200">
             <div className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-gray-800">Menu</h2>
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">Menu</h2>
                 <button
                   onClick={() => setMenuAberto(false)}
-                  className="p-1 hover:bg-gray-100 rounded transition-colors"
+                  className="p-2 hover:bg-gray-200 rounded-lg transition-all hover:rotate-90"
                 >
-                  <X size={20} className="text-gray-700" />
+                  <X size={22} className="text-gray-700" />
                 </button>
               </div>
 
@@ -638,13 +638,13 @@ export default function MealPlanner() {
                       setModoVisualizacao(item.id as ModoVisualizacao);
                       setMenuAberto(false);
                     }}
-                    className={`w-full text-left px-4 py-3 rounded-lg transition-colors flex items-center gap-3 ${
+                    className={`w-full text-left px-4 py-3 rounded-xl transition-all flex items-center gap-3 font-medium ${
                       modoVisualizacao === item.id
-                        ? "bg-gray-700 text-white font-medium"
-                        : "hover:bg-gray-100 text-gray-700"
+                        ? "bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-md transform scale-105"
+                        : "hover:bg-gradient-to-r hover:from-gray-100 hover:to-gray-200 text-gray-700 hover:scale-102"
                     }`}
                   >
-                    <span className="text-xl">{item.icon}</span>
+                    <span className="text-2xl emoji-enhanced">{item.icon}</span>
                     <span>{item.label}</span>
                   </button>
                 ))}
@@ -664,11 +664,11 @@ export default function MealPlanner() {
 
       >
         {/* Cabeçalho */}
-        <div className="mb-8 sm:mb-12 pb-6 border-b border-gray-300 relative">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-tight text-center mb-2">
+        <div className="mb-8 sm:mb-12 pb-6 border-b-2 border-gray-200 relative bg-gradient-to-r from-transparent via-white to-transparent rounded-lg shadow-sm">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-light tracking-tight text-center mb-2 bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 bg-clip-text text-transparent">
             Plano Alimentar Semanal
           </h1>
-          <p className="text-center text-sm font-light text-gray-500 tracking-wide">
+          <p className="text-center text-sm font-medium text-gray-600 tracking-wide">
             Gabriel Pitta
           </p>
 
@@ -677,10 +677,10 @@ export default function MealPlanner() {
             {/* Menu hambúrguer */}
             <button
               onClick={() => setMenuAberto(!menuAberto)}
-              className="p-2 hover:bg-gray-100 rounded transition-colors"
+              className="p-2.5 hover:bg-primary-50 rounded-lg transition-all hover:scale-110 shadow-sm hover:shadow-md border border-gray-200 bg-white"
               title="Menu de navegação"
             >
-              <Menu size={20} className="text-gray-700" />
+              <Menu size={20} className="text-primary-600" />
             </button>
 
             {/* Botões à direita */}
@@ -688,7 +688,7 @@ export default function MealPlanner() {
               {/* Botões globais (sempre visíveis) */}
               <button
                 onClick={() => setMostrarAlimentoModal(true)}
-                className="p-2 hover:bg-green-50 rounded transition-colors"
+                className="p-2.5 hover:bg-green-50 rounded-lg transition-all hover:scale-110 shadow-sm hover:shadow-md border border-gray-200 bg-white"
                 title="Adicionar Alimento"
               >
                 <Plus size={20} className="text-green-600" />

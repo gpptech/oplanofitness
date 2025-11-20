@@ -21,14 +21,14 @@ const TimelineSemanal = memo(function TimelineSemanal({
   );
 
   return (
-    <div>
-      <h2 className="text-xl sm:text-2xl font-light mb-6 tracking-tight">
+    <div className="animate-fade-in">
+      <h2 className="text-xl sm:text-2xl font-light mb-6 tracking-tight bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
         Agenda Semanal
       </h2>
-      <div>
+      <div className="rounded-lg overflow-hidden shadow-soft border border-gray-200">
         {/* Header de horas */}
-        <div className="flex border-b border-gray-100 bg-white">
-          <div className="w-20 flex-shrink-0 p-3 font-bold text-xs text-gray-700 border-r border-gray-100">
+        <div className="flex border-b border-gray-200 bg-gradient-to-r from-slate-50 to-gray-50">
+          <div className="w-20 flex-shrink-0 p-3 font-bold text-xs text-gray-800 border-r border-gray-200">
             Dia
           </div>
           <div className="flex-1 relative">
@@ -50,15 +50,17 @@ const TimelineSemanal = memo(function TimelineSemanal({
         </div>
 
         {/* Dias */}
-        {diasOrdenados.map((dia) => {
+        {diasOrdenados.map((dia, diaIdx) => {
           const diaRefeicoes = refeicoes[dia] || [];
           return (
             <div
               key={dia}
-              className="flex border-b border-gray-100 last:border-b-0 bg-white"
+              className={`flex border-b border-gray-200 last:border-b-0 transition-all hover:bg-slate-50 ${
+                diaIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'
+              }`}
             >
-              <div className="min-w-[85px] w-auto flex-shrink-0 p-3 text-xs text-gray-700 border-r border-gray-100 flex flex-col items-center justify-center">
-                <span className="font-bold mt-1">{dia}</span>
+              <div className="min-w-[85px] w-auto flex-shrink-0 p-3 text-xs text-gray-700 border-r border-gray-200 flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 to-gray-100">
+                <span className="font-bold mt-1 text-gray-800">{dia}</span>
 
                 {/* Calcular resumo do dia */}
                 {(() => {
@@ -204,11 +206,13 @@ const TimelineSemanal = memo(function TimelineSemanal({
                   return (
                     <div
                       key={ref.id}
-                      className="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 z-20"
+                      className="absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2 z-20 group cursor-pointer"
                       style={{ left: `${position}%` }}
                       title={`${ref.nome} - ${ref.hora}:00`}
                     >
-                      <span className="text-lg">{simbolo.emoji}</span>
+                      <span className="text-2xl emoji-enhanced group-hover:scale-125 transition-transform duration-200 filter drop-shadow-md">
+                        {simbolo.emoji}
+                      </span>
                     </div>
                   );
                 })}
@@ -221,27 +225,43 @@ const TimelineSemanal = memo(function TimelineSemanal({
         {(() => {
           const totais = calcularTotaisSemana();
           return (
-            <div className="flex border-t border-gray-200 bg-gray-50">
-              <div className="w-20 flex-shrink-0 p-3 text-xs font-semibold text-gray-800 border-r border-gray-100 flex items-center justify-center">
+            <div className="flex border-t-2 border-gray-300 bg-gradient-to-r from-blue-50 to-indigo-50">
+              <div className="w-20 flex-shrink-0 p-3 text-xs font-bold text-gray-900 border-r border-gray-200 flex items-center justify-center">
                 Total
               </div>
               <div className="flex-1 p-3 text-sm text-gray-800 flex items-center">
-                <div>
-                  <div className="text-xs">
-                    <strong>{totais.kcal}</strong> kcal ·{" "}
-                    <strong>{totais.prot}g</strong> P ·{" "}
-                    <strong>{totais.carb}g</strong> C ·{" "}
-                    <strong>{totais.gord}g</strong> G - Média semanal:{" "}
-                    <strong>{(totais.kcal / 7).toFixed(0)}</strong> kcal ·{" "}
-                    <strong>{(totais.prot / 7).toFixed(0)}g</strong> P ·{" "}
-                    <strong>{(totais.carb / 7).toFixed(0)}g</strong> C ·{" "}
-                    <strong>{(totais.gord / 7).toFixed(0)}g</strong> G
+                <div className="w-full">
+                  <div className="text-xs font-medium">
+                    <span className="inline-flex items-center px-2 py-1 rounded-md bg-white shadow-sm mr-2">
+                      <strong className="text-primary-600">{totais.kcal}</strong>&nbsp;kcal
+                    </span>
+                    <span className="inline-flex items-center px-2 py-1 rounded-md bg-white shadow-sm mr-2">
+                      <strong className="text-green-600">{totais.prot}g</strong>&nbsp;P
+                    </span>
+                    <span className="inline-flex items-center px-2 py-1 rounded-md bg-white shadow-sm mr-2">
+                      <strong className="text-yellow-600">{totais.carb}g</strong>&nbsp;C
+                    </span>
+                    <span className="inline-flex items-center px-2 py-1 rounded-md bg-white shadow-sm mr-2">
+                      <strong className="text-orange-600">{totais.gord}g</strong>&nbsp;G
+                    </span>
                   </div>
-                  <div className="text-xs text-gray-600 mt-1">
-                    Jejum total (soma dias): {totais.jejumTotal}h{" "}
-                    {totais.diasComJejum > 0
-                      ? `• média: ${(totais.jejumTotal / totais.diasComJejum).toFixed(1)}h`
-                      : ""}
+                  <div className="text-xs text-gray-700 mt-2 flex items-center gap-2">
+                    <span className="font-semibold">Média diária:</span>
+                    <span className="text-primary-700 font-medium">{(totais.kcal / 7).toFixed(0)} kcal</span>
+                    <span className="text-gray-400">·</span>
+                    <span className="text-green-700 font-medium">{(totais.prot / 7).toFixed(0)}g P</span>
+                    <span className="text-gray-400">·</span>
+                    <span className="text-yellow-700 font-medium">{(totais.carb / 7).toFixed(0)}g C</span>
+                    <span className="text-gray-400">·</span>
+                    <span className="text-orange-700 font-medium">{(totais.gord / 7).toFixed(0)}g G</span>
+                  </div>
+                  <div className="text-xs text-gray-600 mt-1.5">
+                    <span className="font-semibold">Jejum total:</span> {totais.jejumTotal}h
+                    {totais.diasComJejum > 0 && (
+                      <span className="ml-2 text-jejum-500 font-medium">
+                        • média: {(totais.jejumTotal / totais.diasComJejum).toFixed(1)}h/dia
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>

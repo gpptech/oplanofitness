@@ -50,38 +50,47 @@ export default function PainelConfig({
     : "max-h-[600px]";
 
   return (
-    <div className={containerClass}>
-      <div className="bg-gray-50 border border-gray-200 rounded overflow-hidden max-w-4xl mx-auto">
+    <div className={`${containerClass} animate-fade-in`}>
+      <div className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden max-w-4xl mx-auto shadow-card">
         {/* Abas */}
-        <div className="flex border-b border-gray-200">
+        <div className="flex border-b-2 border-gray-200 bg-gradient-to-r from-slate-50 to-gray-50">
           <button
             onClick={() => setAbaSelecionada("visual")}
-            className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
+            className={`flex-1 px-4 py-3 text-sm font-semibold transition-all relative ${
               abaSelecionada === "visual"
-                ? "bg-white text-gray-900 border-b-2 border-gray-900"
-                : "text-gray-600 hover:text-gray-900"
+                ? "bg-white text-primary-700 shadow-sm"
+                : "text-gray-600 hover:text-gray-900 hover:bg-white/50"
             }`}
           >
+            {abaSelecionada === "visual" && (
+              <span className="absolute bottom-0 left-0 right-0 h-1 bg-primary-600 rounded-t-full"></span>
+            )}
             Visual
           </button>
           <button
             onClick={() => setAbaSelecionada("refeicoes")}
-            className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
+            className={`flex-1 px-4 py-3 text-sm font-semibold transition-all relative ${
               abaSelecionada === "refeicoes"
-                ? "bg-white text-gray-900 border-b-2 border-gray-900"
-                : "text-gray-600 hover:text-gray-900"
+                ? "bg-white text-primary-700 shadow-sm"
+                : "text-gray-600 hover:text-gray-900 hover:bg-white/50"
             }`}
           >
+            {abaSelecionada === "refeicoes" && (
+              <span className="absolute bottom-0 left-0 right-0 h-1 bg-primary-600 rounded-t-full"></span>
+            )}
             Refeições
           </button>
           <button
             onClick={() => setAbaSelecionada("alimentos")}
-            className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
+            className={`flex-1 px-4 py-3 text-sm font-semibold transition-all relative ${
               abaSelecionada === "alimentos"
-                ? "bg-white text-gray-900 border-b-2 border-gray-900"
-                : "text-gray-600 hover:text-gray-900"
+                ? "bg-white text-primary-700 shadow-sm"
+                : "text-gray-600 hover:text-gray-900 hover:bg-white/50"
             }`}
           >
+            {abaSelecionada === "alimentos" && (
+              <span className="absolute bottom-0 left-0 right-0 h-1 bg-primary-600 rounded-t-full"></span>
+            )}
             Adicionar Alimento
           </button>
         </div>
@@ -398,18 +407,18 @@ export default function PainelConfig({
           )}
 
           {/* Botões de ação */}
-          <div className="mt-6 flex gap-2">
+          <div className="mt-6 flex gap-3 pt-6 border-t-2 border-gray-200">
             <button
               onClick={salvarComoPadrao}
-              className="flex-1 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-800 transition-colors text-sm font-medium"
+              className="flex-1 px-4 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all text-sm font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
             >
-              Salvar como Padrão
+              💾 Salvar como Padrão
             </button>
             <button
               onClick={restaurarPadroesOriginais}
-              className="flex-1 px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors text-sm font-medium"
+              className="flex-1 px-4 py-3 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 rounded-lg hover:from-gray-200 hover:to-gray-300 transition-all text-sm font-semibold shadow-sm hover:shadow-md"
             >
-              Restaurar Original
+              ↺ Restaurar Original
             </button>
           </div>
         </div>
