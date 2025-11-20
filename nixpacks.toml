@@ -1,18 +1,11 @@
 # Nixpacks configuration for Railway deployment
 # Docs: https://nixpacks.com/docs/configuration/file
 
-# Force Python provider detection
-providers = ["node", "python"]
+# Force Python and Node provider detection
+providers = ["python", "node"]
 
-[phases.setup]
-nixPkgs = ["...", "python311"]
-
-[phases.install]
-cmds = [
-  "pip install --upgrade pip",
-  "pip install -r requirements.txt",
-  "npm install"
-]
+[variables]
+NIXPACKS_PYTHON_VERSION = "3.11"
 
 [phases.build]
 cmds = ["npm run build"]
