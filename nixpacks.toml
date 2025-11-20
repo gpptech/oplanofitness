@@ -1,13 +1,16 @@
 # Nixpacks configuration for Railway deployment
 # Docs: https://nixpacks.com/docs/configuration/file
 
+# Force Python provider detection
+providers = ["node", "python"]
+
 [phases.setup]
-nixPkgs = ["python311", "python311Packages.pip", "nodejs_20"]
+nixPkgs = ["...", "python311"]
 
 [phases.install]
 cmds = [
-  "python3 -m pip install --upgrade pip",
-  "python3 -m pip install -r requirements.txt",
+  "pip install --upgrade pip",
+  "pip install -r requirements.txt",
   "npm install"
 ]
 
@@ -15,4 +18,4 @@ cmds = [
 cmds = ["npm run build"]
 
 [start]
-cmd = "cd data/api && python3 -m uvicorn gestor_alimentos_api:app --host 0.0.0.0 --port $PORT"
+cmd = "cd data/api && uvicorn gestor_alimentos_api:app --host 0.0.0.0 --port $PORT"
