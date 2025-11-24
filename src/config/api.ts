@@ -5,12 +5,21 @@ const ENV = import.meta.env;
 /**
  * Determina a base URL da API automaticamente:
  * - Em dev (Vite): usa VITE_API_URL ou localhost
- * - Em produção (Render): usa URL da API separada
+ * - Em produção (Render/Railway): usa mesma URL (backend serve frontend)
  */
 function getApiBaseUrl(): string {
   // Se VITE_API_URL está definido, use (dev ou override)
   if (ENV.VITE_API_URL) {
     return ENV.VITE_API_URL;
+  }
+
+  // Em produção no Railway: backend e frontend no mesmo serviço
+  // URL: https://oplanofitness-api-production.up.railway.app
+  if (typeof window !== 'undefined' &&
+      (window.location.hostname.includes('railway.app') ||
+       window.location.hostname.includes('up.railway.app'))) {
+    // No Railway, usa a mesma URL (backend serve o frontend)
+    return window.location.origin;
   }
 
   // Em produção no Render: frontend e backend são serviços separados
